@@ -26,7 +26,7 @@ print(tp.colored(text='Hello World! Yes',
 
 tp.blink(message=tp.colored(text='Hello World!',
                             color='#000000',
-                            highlight='#00bfff'), newMessage='Oh... I am back to normal text!')
+                            highlight='#00bfff'), new_message='Oh... I am back to normal text!')
 tp.printcolor({'end': ''},
               text='Hello World! Hmm',
               color='#000000',
