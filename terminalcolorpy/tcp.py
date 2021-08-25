@@ -105,7 +105,7 @@ def colored(
                 if '#' in k:
                     to_return.append(colors.rgb_to_ansii(colors.hex_to_rgb(k), v))
                 else:
-                    to_return.append(colors.color_dict[k if k == 38 else k + 'hl'])
+                    to_return.append(colors.color_dict[k if v == 38 else k + 'hl'])
 
             elif isinstance(k, (list, tuple)):
                 if max(k) > 255:
