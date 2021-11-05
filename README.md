@@ -43,15 +43,15 @@ TerminalColorPy has 4 main functions,
 - printcolor
 - flip_text
 
-**prainbow** It's alias is *pr*, takes a single parameter which is text to return as rainbow.
+**prainbow** Its alias is *pr*, takes a single parameter which is text to return as rainbow.
 
-**colored** It's alias is *c*, takes 4 parameteres, which are:
+**colored** Its alias is *c*, takes 4 parameteres, which are:
  - text (mandatory)
  - color (mandatory)
  - highlight (optional)
  - markup (optional)
 
-**blink** It's alias is *b*, takes 2 parameterers, which are:
+**blink** Its alias is *b*, takes 2 parameterers, which are:
 - message (mandatory),
   - initial message to print
 - lenght (optional)
@@ -59,7 +59,7 @@ TerminalColorPy has 4 main functions,
 - new_message (optional)
   - what to replace initial message with, default ''
 
-**printcolor** It's alias is *pc*, takes 2 parameters, which are:
+**printcolor** Its alias is *pc*, takes 2 parameters, which are:
 - print_arguments (optional) 
   - arguments for the builtin python3 print function
 - kwargs (mandatory)
