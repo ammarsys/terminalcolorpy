@@ -43,32 +43,32 @@ TerminalColorPy has 4 main functions,
 - printcolor
 - flip_text
 
-**prainbow** It's alias is *pr*, takes a single parameter which is text to return as rainbow.
+**prainbow** Its alias is *pr*, takes a single parameter and returns text formatted in rainbow colors.
 
-**colored** It's alias is *c*, takes 4 parameteres, which are:
+**colored** Its alias is *c*, takes 4 parameters, which are:
  - text (mandatory)
  - color (mandatory)
  - highlight (optional)
  - markup (optional)
 
-**blink** It's alias is *b*, takes 2 parameterers, which are:
+**blink** Its alias is *b*, takes 2 parameterers, which are:
 - message (mandatory),
   - initial message to print
-- lenght (optional)
-  - how long til the initial message should change
+- length (optional)
+  - how long until the initial message should change
 - new_message (optional)
-  - what to replace initial message with, default ''
+  - what to replace the initial message with, defaulting to ''
 
-**printcolor** It's alias is *pc*, takes 2 parameters, which are:
+**printcolor** Its alias is *pc*, takes 2 parameters, which are:
 - print_arguments (optional) 
   - arguments for the builtin python3 print function
 - kwargs (mandatory)
   - keyword arguments for the terminalcolorpy.colored function
 
-Message is the string to print to the console, lenght is how long it should stay and 
+Message is the string to print to the console, length is how long it should stay and 
 new message is what it should be replaced with.
 
-HighLight & Color take either a string, an RGB value or even a hex code. For example,
+HighLight & Color take either a string, a RGB value or even a hex code. For example,
     
 ```python
 from terminalcolorpy import colored, blink, printcolor
@@ -131,9 +131,9 @@ text_markup_values = [
 
 **RGB Generator** https://www.w3schools.com/colors/colors_rgb.asp
 
-It works on any terminals that support ASCII codes, include but not limited to:
+It works on any terminals that support ASCII codes, includes but not limited to:
 
-To use this in a Windows terminal, simply make a empty system call which enables colors in the terminal:
+To use this in a Windows terminal, simply make an empty system call which enables colors in the terminal:
 
 `import os; os.system('')'`
 
