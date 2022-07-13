@@ -1,6 +1,8 @@
+# Standard library imports
+
 import typing
-import random
 import time
+import random
 
 GITHUB = "https://www.github.com/novusys/terminalcolorpy"
 END = "\033[0m"
