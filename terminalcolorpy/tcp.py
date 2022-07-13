@@ -4,65 +4,56 @@ import time
 
 GITHUB = "https://www.github.com/novusys/terminalcolorpy"
 END = "\033[0m"
+COLOR_DICT = {
+    # color
+    "pink": "\033[95m",
+    "blue": "\033[94m",
+    "cyan": "\033[96m",
+    "green": "\033[92m",
+    "yellow": "\033[93m",
+    "red": "\033[91m",
+    "black": "\x1b[30m",
+    "orange": "\033[38;2;255;69;0m",
+    # highlight
+    "grayhl": "\x1b[7m",
+    "pinkhl": "\x1b[45m",
+    "blackhl": "\x1b[40m",
+    "yellowhl": "\x1b[43m",
+    "greenhl": "\x1b[42m",
+    "bluehl": "\x1b[44m",
+    "redhl": "\x1b[41m",
+    # markup
+    "bold": "\033[1m",
+    "underline": "\033[4m",
+    "italic": "\x1B[3m",
+    "striked": "\033[9m",
+    "framed": "\033[52m",
+}
 
 
-class _Colors:
+def hex_to_rgb(hexcode: str) -> list:
+    """Convert a hex code (string) to RGB. Source: """
+
+    hexcode = hexcode.lstrip("#")
+    hlen = len(hexcode)
+    return list(
+        int(hexcode[i:i + hlen // 3], 16) for i in range(0, hlen, hlen // 3)
+    )
+
+
+def rgb_to_ansi(rgb: typing.Union[list, tuple], num: int) -> str:
     """
-    The class containing all necessary things in order for this module to work. This is an private class.
-    All highlights are formatted in the following way: color + hl (ex: grayhl)
+    Converts RGB to ANSI escape sequences.
+
+    Args:
+        rgb (Union[list, tuple]): list/tuple to convert
+        num (int): 38 or 4; represents whether the string should be a highlight or a color
+
+    Returns:
+        str with ANSI escape sequences
     """
 
-    color_dict = {
-        # color
-        "pink": "\033[95m",
-        "blue": "\033[94m",
-        "cyan": "\033[96m",
-        "green": "\033[92m",
-        "yellow": "\033[93m",
-        "red": "\033[91m",
-        "black": "\x1b[30m",
-        "orange": "\033[38;2;255;69;0m",
-        # highlight
-        "grayhl": "\x1b[7m",
-        "pinkhl": "\x1b[45m",
-        "blackhl": "\x1b[40m",
-        "yellowhl": "\x1b[43m",
-        "greenhl": "\x1b[42m",
-        "bluehl": "\x1b[44m",
-        "redhl": "\x1b[41m",
-        # markup
-        "bold": "\033[1m",
-        "underline": "\033[4m",
-        "italic": "\x1B[3m",
-        "striked": "\033[9m",
-        "framed": "\033[52m",
-    }
-
-    def hex_to_rgb(self, hexcode: str) -> list:
-        """Convert a hex code (string) to RGB. Source: """
-
-        hexcode = hexcode.lstrip("#")
-        hlen = len(hexcode)
-        return list(
-            int(hexcode[i : i + hlen // 3], 16) for i in range(0, hlen, hlen // 3)
-        )
-
-    def rgb_to_ansi(self, rgb: typing.Union[list, tuple], num: int) -> str:
-        """
-        Converts RGB to ANSI escape sequences.
-
-        Args:
-            rgb (Union[list, tuple]): list/tuple to convert
-            num (int): 38 or 4; represents whether the string should be a highlight or a color
-
-        Returns:
-            str with ANSI escape sequences
-        """
-
-        return f"\033[{num};2;{rgb[0]};{rgb[1]};{rgb[2]}m"
-
-
-colors = _Colors()
+    return f"\033[{num};2;{rgb[0]};{rgb[1]};{rgb[2]}m"
 
 
 def flip_text(text: str) -> str:
@@ -82,7 +73,7 @@ def prainbow(text: str) -> str:
     return (
         "".join(
             [
-                colors.rgb_to_ansi(
+                rgb_to_ansi(
                     (
                         random.randint(1, 255),
                         random.randint(1, 255),
@@ -148,17 +139,17 @@ def colored(
         for k, v in ((color, 38), (highlight, 48)):
             if isinstance(k, str):
                 if "#" in k:
-                    to_return.append(colors.rgb_to_ansi(colors.hex_to_rgb(k), v))
+                    to_return.append(rgb_to_ansi(hex_to_rgb(k), v))
                 else:
-                    to_return.append(colors.color_dict[k if v == 38 else k + "hl"])
+                    to_return.append(COLOR_DICT[k if v == 38 else k + "hl"])
 
             elif isinstance(k, (list, tuple)):
                 if max(k) > 255:
                     raise Exception("The RGB values must be inbetween 1 and 255.")
-                to_return.append(colors.rgb_to_ansi(k, v))
+                to_return.append(rgb_to_ansi(k, v))
 
         if isinstance(markup, (list, tuple)):
-            to_return.append("".join(colors.color_dict[i] for i in markup))
+            to_return.append("".join(COLOR_DICT[i] for i in markup))
 
     except KeyError:
         raise Exception(
