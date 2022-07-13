@@ -2,7 +2,7 @@ import typing
 import random
 import time
 
-GITHUB = "https://www.github.com/ammar-sys/terminalcolorpy"
+GITHUB = "https://www.github.com/novusys/terminalcolorpy"
 END = "\033[0m"
 
 
@@ -40,7 +40,7 @@ class _Colors:
 
     def hex_to_rgb(self, hexcode: str) -> list:
         """Convert a hex code (string) to RGB. Source: """
-        
+
         hexcode = hexcode.lstrip("#")
         hlen = len(hexcode)
         return list(
