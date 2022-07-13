@@ -136,7 +136,7 @@ def colored(
     try:
         color = color.lower() if isinstance(color, str) else color
         highlight = highlight.lower() if isinstance(highlight, str) else highlight
-        markup = map(str.lower, markup) if isinstance(markup, (list, tuple)) else markup
+        markup = [i.lower() for i in markup] if isinstance(markup, (list, tuple)) else markup
 
         for k, v in ((color, 38), (highlight, 48)):
             if isinstance(k, str):
