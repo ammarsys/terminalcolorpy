@@ -16,15 +16,15 @@ setuptools.setup(
         "Bug Tracker": "https://github.com/ammarsys/terminalcolorpy/issues",
     },
     classifiers=[
-        'Development Status :: 3 - Alpha',
-        'Intended Audience :: Developers',
-        'Topic :: Software Development :: Build Tools',
-        'License :: OSI Approved :: MIT License',
-        'Programming Language :: Python :: 3.6',
+        "Development Status :: 3 - Alpha",
+        "Intended Audience :: Developers",
+        "Topic :: Software Development :: Build Tools",
+        "License :: OSI Approved :: MIT License",
+        "Programming Language :: Python :: 3.6",
         "Operating System :: OS Independent",
     ],
-    packages=['pyaww'],
+    packages=["pyaww"],
     install_requires=[],
     python_requires=">=3.6",
-    license='MIT'
+    license="MIT",
 )
