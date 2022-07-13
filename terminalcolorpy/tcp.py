@@ -1,8 +1,10 @@
 # Standard library imports
 
-import typing
+from typing import Union
+
 import time
 import random
+
 
 GITHUB = "https://www.github.com/novusys/terminalcolorpy"
 END = "\033[0m"
@@ -43,7 +45,7 @@ def hex_to_rgb(hexcode: str) -> list:
     )
 
 
-def rgb_to_ansi(rgb: typing.Union[list, tuple], num: int) -> str:
+def rgb_to_ansi(rgb: Union[list, tuple], num: int) -> str:
     """
     Converts RGB to ANSI escape sequences.
 
@@ -115,9 +117,9 @@ def blink(message: str, length: float = 1, new_message: str = " ") -> None:
 
 def colored(
     text: str,
-    color: typing.Union[list, tuple, str],
-    highlight: typing.Union[list, tuple, str] = None,
-    markup: typing.Union[list, tuple] = None,
+    color: Union[list, tuple, str],
+    highlight: Union[list, tuple, str] = None,
+    markup: Union[list, tuple] = None,
 ) -> str:
     """
     Parse color arguments and return the applied version to the text.
@@ -155,7 +157,7 @@ def colored(
 
     except KeyError:
         raise Exception(
-            "Could not find the provided element, please look at the acceptable options over at: {}".format(
+            "Could not parse the arguments, please see the documentation over at {}".format(
                 GITHUB
             )
         )
