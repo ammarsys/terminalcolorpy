@@ -39,24 +39,26 @@ class _Colors:
     }
 
     def hex_to_rgb(self, hexcode: str) -> list:
-        """
-        Convert a hex code (string) to RGB. Source: https://gist.github.com/matthewkremer/3295567
-
-        :param str hexcode: hexcode to convert
-        """
+        """Convert a hex code (string) to RGB. Source: """
+        
         hexcode = hexcode.lstrip("#")
         hlen = len(hexcode)
         return list(
             int(hexcode[i : i + hlen // 3], 16) for i in range(0, hlen, hlen // 3)
         )
 
-    def rgb_to_ansii(self, rgb: typing.Union[list, tuple], num: int) -> str:
+    def rgb_to_ansi(self, rgb: typing.Union[list, tuple], num: int) -> str:
         """
-        Convert RGB list/tuple to a ANSI string.
+        Converts RGB to ANSI escape sequences.
 
-        :param rgb: list to convert
-        :param num: 38 or 48. represents whether the string should be a highlight or a color
+        Args:
+            rgb (Union[list, tuple]): list/tuple to convert
+            num (int): 38 or 4; represents whether the string should be a highlight or a color
+
+        Returns:
+            str with ANSI escape sequences
         """
+
         return f"\033[{num};2;{rgb[0]};{rgb[1]};{rgb[2]}m"
 
 
@@ -65,6 +67,7 @@ colors = _Colors()
 
 def flip_text(text: str) -> str:
     """Flip text to characters that are upside down version of that letter."""
+
     return text.translate(
         str.maketrans(
             r"""abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!"#$%&'()*+,-./:;<=>?@[\]^_`{|}~""",
@@ -74,11 +77,12 @@ def flip_text(text: str) -> str:
 
 
 def prainbow(text: str) -> str:
-    """Print text in rainbow colors."""
+    """Returns text in colors of the rainbow (RGB 1-255, not CSPRNG)"""
+
     return (
         "".join(
             [
-                colors.rgb_to_ansii(
+                colors.rgb_to_ansi(
                     (
                         random.randint(1, 255),
                         random.randint(1, 255),
@@ -94,16 +98,25 @@ def prainbow(text: str) -> str:
     )
 
 
-def blink(message: str, lenght: float = 1.0, new_message: str = " ") -> None:
+def blink(message: str, length: float = 1, new_message: str = " ") -> None:
     """
-    Print a text then replace it with something else.
+    Print the message then replace it with a new message.
 
-    :param message: initial message to print
-    :param lenght: how long the initial message should stay
-    :param new_message: what should the initial message be replaced with
+    Beware, this function is **blocking** because of the print statement. If you need to run this function
+    synchronously, please refer to the accepted answer of this S/O question,
+    https://stackoverflow.com/questions/54685210/calling-sync-functions-from-async-function
+
+    Args:
+        message (str):
+        length (float):
+        new_message (str): message to be displayed after the timer expires (default is nothing)
+
+    Returns:
+        None
     """
+
     print(message, end="")
-    time.sleep(lenght)
+    time.sleep(length)
     print(f"\r{new_message}")
 
 
@@ -114,13 +127,18 @@ def colored(
     markup: typing.Union[list, tuple] = None,
 ) -> str:
     """
-    Return colored text from the _Colors.color_dict dictionary as well as highlight and markup.
+    Parse color arguments and return the applied version to the text.
 
-    :param str text: text to colorify
-    :param list, tuple, str color: color for the text. accepts RGB, hex (in string form) and values from the dict
-    :param list, tuple, str highlight: highlight for the text. accepts RGB, hex (in string form) and values from the dict
-    :param list, tuple markup: markup from _Colors.color_dict
+    Args:
+        text (str): text to parse
+        color (Union[list, tuple, str]): color for the text, accepts RGB, hex and English words
+        highlight ([list, tuple, str]): highlight for the text, accepts RGB, hex and English words
+        markup ([list, tuple]): markup from _Colors.color_dict
+
+    Returns:
+        A string with the (now colored) text
     """
+
     to_return = []
     try:
         color = color.lower() if isinstance(color, str) else color
@@ -130,14 +148,14 @@ def colored(
         for k, v in ((color, 38), (highlight, 48)):
             if isinstance(k, str):
                 if "#" in k:
-                    to_return.append(colors.rgb_to_ansii(colors.hex_to_rgb(k), v))
+                    to_return.append(colors.rgb_to_ansi(colors.hex_to_rgb(k), v))
                 else:
                     to_return.append(colors.color_dict[k if v == 38 else k + "hl"])
 
             elif isinstance(k, (list, tuple)):
                 if max(k) > 255:
                     raise Exception("The RGB values must be inbetween 1 and 255.")
-                to_return.append(colors.rgb_to_ansii(k, v))
+                to_return.append(colors.rgb_to_ansi(k, v))
 
         if isinstance(markup, (list, tuple)):
             to_return.append("".join(colors.color_dict[i] for i in markup))
@@ -152,14 +170,21 @@ def colored(
     return "".join(to_return) + text + END
 
 
-def printcolor(print_arguments: dict = None, **kwargs) -> None:
+def printcolor(colored_kwargs: dict = None, **kwargs) -> None:
     """
-    Print colored text.
+    Implements a shortcut for using the builtin function print with this modules colored function.
 
-    :param print_arguments: arguments for the builtin print function (py3+)
-    :param kwargs: keyword arguments for the colored function
+    Args:
+        colored_kwargs (dict): keyword arguments for this modules colored function
+        **kwargs: keyword arguments for the builtin print function
+
+    Returns:
+        None
     """
-    print(colored(**kwargs), **print_arguments if print_arguments is not None else {})
+
+    colored_kwargs = colored_kwargs or {}
+
+    print(colored(**colored_kwargs), **kwargs)
 
 
 # aliases
