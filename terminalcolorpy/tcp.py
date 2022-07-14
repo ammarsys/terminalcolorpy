@@ -34,13 +34,11 @@ COLOR_DICT = {
 
 
 def hex_to_rgb(hexcode: str) -> list:
-    """Convert a hex code (string) to RGB. Source: """
+    """Convert a hex code (string) to RGB. Source:"""
 
     hexcode = hexcode.lstrip("#")
     hlen = len(hexcode)
-    return list(
-        int(hexcode[i:i + hlen // 3], 16) for i in range(0, hlen, hlen // 3)
-    )
+    return list(int(hexcode[i : i + hlen // 3], 16) for i in range(0, hlen, hlen // 3))
 
 
 def rgb_to_ansi(rgb: list[int] | tuple[int, ...], num: int) -> str:
@@ -136,7 +134,9 @@ def colored(
     try:
         color = color.lower() if isinstance(color, str) else color
         highlight = highlight.lower() if isinstance(highlight, str) else highlight
-        markup = [i.lower() for i in markup] if isinstance(markup, (list, tuple)) else markup
+        markup = (
+            [i.lower() for i in markup] if isinstance(markup, (list, tuple)) else markup
+        )
 
         for k, v in ((color, 38), (highlight, 48)):
             if isinstance(k, str):
