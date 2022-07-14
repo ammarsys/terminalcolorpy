@@ -1,7 +1,5 @@
 # Standard library imports
 
-from typing import Union
-
 import time
 import random
 
@@ -45,7 +43,7 @@ def hex_to_rgb(hexcode: str) -> list:
     )
 
 
-def rgb_to_ansi(rgb: Union[list, tuple], num: int) -> str:
+def rgb_to_ansi(rgb: list[int] | tuple[int, ...], num: int) -> str:
     """
     Converts RGB to ANSI escape sequences.
 
@@ -117,9 +115,9 @@ def blink(message: str, length: float = 1, new_message: str = " ") -> None:
 
 def colored(
     text: str,
-    color: Union[list, tuple, str],
-    highlight: Union[list, tuple, str] = None,
-    markup: Union[list, tuple] = None,
+    color: list | tuple | str,
+    highlight: list | tuple | str | None = None,
+    markup: list | tuple | None = None,
 ) -> str:
     """
     Parse color arguments and return the applied version to the text.
