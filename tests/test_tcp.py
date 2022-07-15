@@ -1,5 +1,8 @@
 # Standard library imports
 
+from typing import Any
+from io import StringIO
+
 import sys
 
 # Local application/library specific imports
@@ -9,7 +12,7 @@ import terminalcolorpy as tcp
 
 class Teststdout(object):
     def __init__(self) -> None:
-        self.printed = []
+        self.printed: list[Any] = []
 
     def write(self, string) -> None:
         self.printed.append(string)
@@ -32,11 +35,11 @@ def test_prainbow() -> None:
 
 def test_blink() -> None:
     before = sys.stdout
-    sys.stdout = Teststdout()
+    sys.stdout = Teststdout()  # type: ignore
 
     tcp.blink("wee")
 
-    if not len(sys.stdout.printed):
+    if not len(sys.stdout.printed):  # type: ignore
         sys.stdout = before
         raise AssertionError("nothing printed to stdout")
 
@@ -45,11 +48,11 @@ def test_blink() -> None:
 
 def test_printcolor() -> None:
     before = sys.stdout
-    sys.stdout = Teststdout()
+    sys.stdout = Teststdout()  # type: ignore
 
     tcp.printcolor({"text": "hello", "color": "red"}, flush=False)
 
-    if not len(sys.stdout.printed):
+    if not len(sys.stdout.printed):  # type: ignore
         sys.stdout = before
         raise AssertionError("nothing printed to stdout")
 
