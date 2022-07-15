@@ -38,7 +38,7 @@ def hex_to_rgb(hexcode: str) -> list:
 
     hexcode = hexcode.lstrip("#")
     hlen = len(hexcode)
-    return list(int(hexcode[i:i + hlen // 3], 16) for i in range(0, hlen, hlen // 3))
+    return list(int(hexcode[i : i + hlen // 3], 16) for i in range(0, hlen, hlen // 3))
 
 
 def rgb_to_ansi(rgb: list[int] | tuple[int, ...], num: int) -> str:
