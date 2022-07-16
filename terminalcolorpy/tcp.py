@@ -57,7 +57,7 @@ def rgb_to_ansi(rgb: list[int] | tuple[int, ...], num: int) -> str:
 
 
 def flip_text(text: str) -> str:
-    """Flip text to characters that are upside down version of that letter."""
+    """Flip text to characters that are upsidedown version of that letter."""
 
     return text.translate(
         str.maketrans(
@@ -98,8 +98,8 @@ def blink(message: str, length: float = 1, new_message: str = " ") -> None:
     https://stackoverflow.com/questions/54685210/calling-sync-functions-from-async-function
 
     Args:
-        message (str):
-        length (float):
+        message (str): message to be printed
+        length (float): how long should the message stay
         new_message (str): message to be displayed after the timer expires (default is nothing)
 
     Returns:
@@ -122,8 +122,8 @@ def colored(
 
     Args:
         text (str): text to parse
-        color (Union[list, tuple, str]): color for the text, accepts RGB, hex and English words
-        highlight ([list, tuple, str]): highlight for the text, accepts RGB, hex and English words
+        color (Union[list, tuple, str]): color for the text, accepts RGB, hex (str) and English words
+        highlight ([list, tuple, str]): highlight for the text, accepts RGB, hex (str) and English words
         markup ([list, tuple]): markup from _Colors.color_dict
 
     Returns:
