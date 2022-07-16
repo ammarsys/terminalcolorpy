@@ -55,7 +55,6 @@ os.system('')
     synchronously, please refer to the accepted answer of this S/O question,
     https://stackoverflow.com/questions/54685210/calling-sync-functions-from-async-function
 
-<<<<<<< HEAD
     Args:
         message (str): message to be printed
         length (float): how long should the message stay
@@ -66,12 +65,10 @@ os.system('')
 `printcolor(colored_kwargs: dict = None, **kwargs) -> None:`
 ```
 ->  Implements a shortcut for using the builtin function print with this modules colored function.
-=======
-It works on any terminals that support ASCII codes, includes but not limited to:
 
-To use this in a Windows terminal, simply make an empty system call which enables colors in the terminal:
->>>>>>> f705321cabfd356765f69be4e99a37852c1c550d
-
+    It works on any terminals that support ASCII codes, includes but not limited to:
+    To use this in a Windows terminal, simply make an empty system call which enables colors in the terminal:
+    
     Args:
         colored_kwargs (dict): keyword arguments for this modules colored function
         **kwargs: keyword arguments for the builtin print function
