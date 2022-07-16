@@ -35,8 +35,64 @@ os.system('')
 ```
 <br><br><hr>
 
+<<<<<<< HEAD
 
 `flip_text(text: str) -> str:`
+=======
+TerminalColorPy has 4 main functions,
+- prainbow
+- colored
+- blink
+- printcolor
+- flip_text
+
+**prainbow** Its alias is *pr*, takes a single parameter and returns text formatted in rainbow colors.
+
+**colored** Its alias is *c*, takes 4 parameters, which are:
+ - text (mandatory)
+ - color (mandatory)
+ - highlight (optional)
+ - markup (optional)
+
+**blink** Its alias is *b*, takes 2 parameterers, which are:
+- message (mandatory),
+  - initial message to print
+- length (optional)
+  - how long until the initial message should change
+- new_message (optional)
+  - what to replace the initial message with, defaulting to ''
+
+**printcolor** Its alias is *pc*, takes 2 parameters, which are:
+- print_arguments (optional) 
+  - arguments for the builtin python3 print function
+- kwargs (mandatory)
+  - keyword arguments for the terminalcolorpy.colored function
+
+Message is the string to print to the console, length is how long it should stay and 
+new message is what it should be replaced with.
+
+HighLight & Color take either a string, a RGB value or even a hex code. For example,
+    
+```python
+from terminalcolorpy import colored, blink, printcolor
+
+print(colored('Hello', color='#42f5d7',
+         markup=['striked', 'bold', 'underline', 'italic'],
+         highlight='#42f5d7')
+      )
+
+print(colored('World', color='red',
+         markup=['striked', 'bold'],
+         highlight='blue')
+      )
+
+blink(colored('!', color=[122, 99, 0],
+         markup=['bold'],
+         highlight=[122, 100, 78])
+      )
+      
+printcolor({'end': ''}, color='blue', text='Hello')
+>>>>>>> f705321cabfd356765f69be4e99a37852c1c550d
 ```
 ->  Flip text to characters that are upsidedown version of that letter.
 ```
@@ -57,6 +113,7 @@ os.system('')
     synchronously, please refer to the accepted answer of this S/O question,
     https://stackoverflow.com/questions/54685210/calling-sync-functions-from-async-function
 
+<<<<<<< HEAD
     Args:
         message (str): message to be printed
         length (float): how long should the message stay
@@ -67,6 +124,11 @@ os.system('')
 `printcolor(colored_kwargs: dict = None, **kwargs) -> None:`
 ```
 ->  Implements a shortcut for using the builtin function print with this modules colored function.
+=======
+It works on any terminals that support ASCII codes, includes but not limited to:
+
+To use this in a Windows terminal, simply make an empty system call which enables colors in the terminal:
+>>>>>>> f705321cabfd356765f69be4e99a37852c1c550d
 
     Args:
         colored_kwargs (dict): keyword arguments for this modules colored function
